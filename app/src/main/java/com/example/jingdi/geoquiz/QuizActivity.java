@@ -20,6 +20,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
 
+
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_oceans, true),
             new Question(R.string.question_americas, false),
@@ -63,7 +64,9 @@ public class QuizActivity extends AppCompatActivity {
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(QuizActivity.this, CheatActivity.class);
+                boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                Intent i = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
+//                Intent i = new Intent(QuizActivity.this, CheatActivity.class);
                 startActivity(i);
             }
         });
